@@ -69,9 +69,12 @@ alacoxIC.default <- function(lowerIC, upperIC, X, trunc, theta, normalize.X = TR
   if (!is.null(cl)) stopCluster(cl)
 
   if (normalize.X == TRUE) {
-    atrue_sd <- (arglist$true_sd)
+    atrue_sd <- arglist$true_sd
+    atrue_mu <- arglist$true_mu # added
+
     final.b <- final.b.BIC/atrue_sd
     final.cov <- cov / (atrue_sd %*%t(atrue_sd))
+    final.lambda <- final.lambda/exp(sum(final.b * atrue_mu)) # added
   } else {
     final.b <- final.b.BIC
     final.cov <- cov

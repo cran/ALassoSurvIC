@@ -4,8 +4,9 @@
 \alias{print.unpencoxIC}
 \title{Performing unpenalized nonparametric maximum likelihood estimation for interval censored and possibly left truncated data}
 \usage{
-\method{unpencoxIC}{default}(lowerIC, upperIC, X, trunc = NULL, normalize.X = TRUE,
-  cl = NULL, tol = 0.001, niter = 1e+05, string.cen = Inf, string.missing = NA, ...)
+\method{unpencoxIC}{default}(lowerIC, upperIC, X, trunc = NULL,
+normalize.X = TRUE, covmat = TRUE, cl = NULL, tol = 0.001,
+niter = 1e+05, string.cen = Inf, string.missing = NA, ...)
 }
 
 \arguments{
@@ -19,6 +20,8 @@
 \item{trunc}{A numeric vector for left truncated time. If supplied, the function performs the variable selection for interval censored and left truncated data. If \code{trunc} is missing, the data will be considered as interval censored data.}
 
 \item{normalize.X}{A logical value: if \code{normalize.X} = \code{TRUE}, the covariate matrix \code{X} will be normalized before fitting models. Default is \code{TRUE}.}
+
+\item{covmat}{Controlling the estimation of the covariance matrix}
 
 \item{cl}{A cluster object created by \code{\link[parallel]{makeCluster}} in the \code{parallel} package. If \code{NULL}, no parallel computing is used by default. See details below.}
 
@@ -42,7 +45,7 @@ The cluster object, created by \code{\link[parallel]{makeCluster}} in the \code{
 Use the \code{baseline} function and the \code{plot} function to extract and plot the estimate of the baseline cumulative hazard function, respectively, from the object returned by the \code{unpencoxIC}. The \code{plot} function also provides the plot for estimated baseline survival function. See the usages in the examples given below.
 }
 
-\references{Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \href{https://doi.org/10.1177/0962280219856238}{https://doi.org/10.1177/0962280219856238}
+\references{Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \doi{10.1177/0962280219856238}
 }
 
 
@@ -65,8 +68,8 @@ plot(result, what = "survival")  # plotting the estimated baseline survival func
 ## Use the parallel computing to reduce computational times
 \donttest{library(parallel)
 cl <- makeCluster(2L)  # making the cluster object 'cl' with two CPU cores
-cl <- makeCluster(detectCores()) # run this code to use all CPU cores
 system.time(result <- unpencoxIC(lowerIC, upperIC, X, cl = cl))}
+on.exit()
 
 \donttest{### Getting the unpenalized NPMLE for interval censored and left truncated data
 ## Try following codes with the 'ex_ICLT' data example

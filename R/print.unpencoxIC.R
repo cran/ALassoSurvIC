@@ -17,7 +17,12 @@ print.unpencoxIC <- function(x, ...) {
   digit <- paste("%.", max(3, getOption("digits") - 3), "f", sep = "")
   pcoef <- sprintf(digit, coef)
   pz <- sprintf(digit, z)
-  ppvalue <- fun_less(sprintf(digit, pvalue))
+  if(all(!is.na(x$cov))) {
+    ppvalue <- fun_less(sprintf(digit, pvalue))
+  } else {
+    ppvalue <- rep(NA, length(se))
+  }
+
   pci <- t(apply(ci, 1, function(x, digit) sprintf(digit, x), digit = digit))
   pse <- sprintf(digit, se)
 

@@ -15,7 +15,7 @@ LogicalMatrix fun_sublr(NumericVector u, NumericVector l, NumericVector r) {
 
     for (int k = 0; k < kk; ++k) {
 
-      result(n, k) = (r(n) < 100000000000000) & (u[k] > l(n)) & (u[k] <= r(n));
+      result(n, k) = (r(n) < 100000000000000) && (u[k] > l(n)) && (u[k] <= r(n));
 
     }
 

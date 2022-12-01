@@ -53,7 +53,7 @@ Fan, J., & Li, R. (2001). Variable selection via nonconcave penalized likelihood
 
 Simon, N., Friedman, J., Hastie, T., & Tibshirani, R. (2011). Regularization paths for Cox’s proportional hazards model via coordinate descent. Journal of statistical software, 39(5), 1.
 
-Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \href{https://doi.org/10.1177/0962280219856238}{https://doi.org/10.1177/0962280219856238}
+Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \doi{10.1177/0962280219856238}
 }
 
 \examples{
@@ -71,14 +71,13 @@ X <- ex_IC[, -c(1:2)]
 ## Use parallel computing to reduce the computation time
 library(parallel)
 cl <- makeCluster(2L)  # making the cluster object 'cl' with two CPU cores
-\donttest{cl <- makeCluster(detectCores()) # run this code to use all CPU cores}
-
 system.time(result <- alacoxIC(lowerIC, upperIC, X, cl = cl))
 
 result           # main result
 baseline(result) # obtaining the baseline cumulative hazard estimate
 plot(result)     # plotting the baseline estimated cumulative hazard function by default
 plot(result, what = "survival")  # plotting the estimated baseline survival function
+on.exit()
 
 ### Variable selection for interval censored and left truncated data
 ## Try following codes with the 'ex_ICLT' data example

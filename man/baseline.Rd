@@ -36,7 +36,8 @@ The NPMLE of the baseline cumulative hazard function.
 
 \references{Alioum, A. and Commenges, D. (1996). A proportional hazards model for arbitrarily censored and truncated data. Biometrics 52, 512-524.
 
-Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \href{https://doi.org/10.1177/0962280219856238}{https://doi.org/10.1177/0962280219856238}}
+Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \doi{10.1177/0962280219856238}
+}
 
 \examples{
 library(ALassoSurvIC)
@@ -51,5 +52,4 @@ result <- unpencoxIC(lowerIC, upperIC, X, trunc)
 baseline(result)
 }
 
-\seealso{\code{alacoxIC}; \code{unpencoxIC}}
-\keyword{methods}
+\seealso{\code{\link{alacoxIC}}; \code{\link{unpencoxIC}}}

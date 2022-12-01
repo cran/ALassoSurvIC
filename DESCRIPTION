@@ -2,7 +2,7 @@ Package: ALassoSurvIC
 Type: Package
 Title: Adaptive Lasso for the Cox Regression with Interval Censored and
         Possibly Left Truncated Data
-Version: 0.1.0
+Version: 0.1.1
 Author: Chenxi Li, Daewoo Pak and David Todem
 Maintainer: Daewoo Pak <heavyrain.pak@gmail.com>
 Description: Penalized variable selection tools for the Cox 
@@ -24,6 +24,6 @@ Imports: Rcpp, parallel
 LinkingTo: Rcpp
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-10-14 19:34:35 UTC; dpak
+Packaged: 2022-12-01 14:31:37 UTC; dpak
 Repository: CRAN
-Date/Publication: 2019-10-16 12:20:05 UTC
+Date/Publication: 2022-12-01 16:00:09 UTC

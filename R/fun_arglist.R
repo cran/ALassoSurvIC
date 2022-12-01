@@ -7,6 +7,8 @@ fun_arglist <- function(lowerIC, upperIC, X, trunc, normalize, tol, niter) {
    lr <- cbind(l, r)
    X <- as.matrix(X)
 
+   true_mu <- colMeans(X) #added
+
    if (normalize == TRUE) {
      z <- apply(X,2, function(x) (x-mean(x))/sqrt(sum((x-mean(x))^2)/n))
      true_sd <- sqrt(apply(X,2,var)*(n-1)/n)
@@ -33,6 +35,7 @@ fun_arglist <- function(lowerIC, upperIC, X, trunc, normalize, tol, niter) {
    args$trunc <- trunc
    args$n <- n
    args$z <- z
+   args$true_mu <- true_mu # added
    args$true_sd <- true_sd
    args$set <- set
    args$tol <- tol

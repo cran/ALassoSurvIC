@@ -1,4 +1,4 @@
-unpencoxIC.default <- function(lowerIC, upperIC, X, trunc = NULL, normalize.X = TRUE, cl = NULL, tol = 1e-3, niter = 1e5, string.cen = Inf, string.missing = NA, ...) {
+unpencoxIC.default <- function(lowerIC, upperIC, X, trunc = NULL, normalize.X = TRUE, covmat = TRUE, cl = NULL, tol = 1e-3, niter = 1e5, string.cen = Inf, string.missing = NA, ...) {
 
   match.call()
 
@@ -35,24 +35,33 @@ unpencoxIC.default <- function(lowerIC, upperIC, X, trunc = NULL, normalize.X = 
   unpen <- fun_unpenSurvIC(rep(0, ncol(arglist$z)), arglist)
   final.b0 <- unpen$b
   final.lambda <- unpen$lambda
+  log_pen <- log_penlikelihood(final.b0, arglist)
 
   arglist$initial_lambda <- final.lambda
 
-  message(" Now: calculating the covariance matrix")
-  cov <- fun_cov_parallel(b = final.b0, theta = 0, var.h = 5, arglist, cl)
+  if (covmat == TRUE) {
+    message(" Now: calculating the covariance matrix")
+    cov <- fun_cov_parallel(b = final.b0, theta = 0, var.h = 5, arglist, cl)
+  } else {
+    cov <- rep(NA, ncol(arglist$z))
+  }
 
   message(" Done.")
 
   if (!is.null(cl)) stopCluster(cl)
 
   if (normalize.X == TRUE) {
+    atrue_mu <- arglist$true_mu # added
     atrue_sd <- (arglist$true_sd)
+
     final.b <- final.b0/atrue_sd
     final.cov <- cov / (atrue_sd %*%t(atrue_sd))
+    final.lambda <- final.lambda/exp(sum(final.b * atrue_mu)) # added
   } else {
     final.b <- final.b0
     final.cov <- cov
   }
+
 
   results <- list()
   results$xnames <- xnames
@@ -67,6 +76,7 @@ unpencoxIC.default <- function(lowerIC, upperIC, X, trunc = NULL, normalize.X = 
   results$ind.trunc <- ind.trunc
   results$smallest.trunc <- ifelse(ind.trunc, min(trunc), 0)
   results$normalize.X <- normalize.X
+  results$log_likelihood <- log_pen
 
   class(results) <- "unpencoxIC"
 

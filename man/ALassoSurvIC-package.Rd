@@ -20,7 +20,7 @@ License: \tab GPL (>= 3)\cr
 \author{
 Chenxi Li, Daewoo Pak and David Todem
 }
-\references{Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \href{https://doi.org/10.1177/0962280219856238}{https://doi.org/10.1177/0962280219856238}
+\references{Li, C., Pak, D., & Todem, D. (2019). Adaptive lasso for the Cox regression with interval censored and possibly left truncated data. Statistical methods in medical research. \doi{10.1177/0962280219856238}
 }
 \seealso{
 \code{\link{alacoxIC}}; \code{\link{unpencoxIC}}
